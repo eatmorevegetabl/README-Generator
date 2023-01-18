@@ -1,38 +1,58 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateMd = require('./utils/generateMd.js');
 
 inquirer
   .prompt([
     {
       type: 'input',
-      name: 'Description',
-      message: 'Why did you build this project?',
+      name: 'title',
+      message: 'What is the title of your project?',
     },
     {
       type: 'input',
-      name: 'Description',
-      message: 'What problem does it solve?',
+      name: 'description',
+      message: 'Please describe your project',
     },
     {
       type: 'input',
-      name: 'Description',
-      message: 'What did you learn?',
+      name: 'installation',
+      message: 'How does one install this app?',
     },
     {
       type: 'input',
-      name: 'Installation',
-      message: 'What are the steps required to install your project?',
+      name: 'usage',
+      message: 'How does one use this app?',
+    },
+    {
+      type: 'list',
+      message: 'Which license did you use on your app?',
+      name: 'license',
+      choices: ['MIT', 'Public domain', 'GNU'],
     },
     {
       type: 'input',
-      name: 'Link',
-      message: 'Pls add a link to your video:',
+      name: 'contributions',
+      message: 'Who contributed to this project?',
+    },
+    {
+      type: 'input',
+      name: 'tests',
+      message: 'How do you test this app?',
+    },
+    {
+      type: 'input',
+      name: 'ghusername',
+      message: 'Please enter your Github username',
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'Pls enter your email',
     },
   ])
   .then((data) => {
-    const filename = `README.md`;
-
-    fs.writeFile(filename, JSON.stringify(data, null, '\t'), (err) =>
+    fs.writeFile('README.md', generateMd(data), (err) =>
       err ? console.log(err) : console.log('Success!')
     );
   });
