@@ -1,1 +1,7 @@
-# README-Generator
+{
+	"name": "M",
+	"stack": [
+		"CSS"
+	],
+	"contact": "email"
+}
